@@ -12,7 +12,44 @@ import java.util.ArrayList;
  *
  * @author reroes
  */
-public class ReporteDocente extends Reporte{
+public class ReporteDocente extends Reporte {
+
     double promedioSueldos;
     ArrayList<Docente> lista;
+
+    public ReporteDocente(String cod) {
+        super(cod);
+    }
+
+    public void establecerPromedioSueldos() {
+        for (int i = 0; i < lista.size(); i++) {
+            promedioSueldos = promedioSueldos + lista.get(i).getSueldo();
+        }
+        promedioSueldos = promedioSueldos / lista.size();
+    }
+
+    public void establecerLista(ArrayList<Docente> lis) {
+        lista = lis;
+    }
+
+    public double obtenerPromedioSueldos() {
+        return promedioSueldos;
+    }
+
+    public ArrayList<Docente> obtenerLista() {
+        return lista;
+    }
+
+    @Override
+    public String toString() {
+        String cadenaDoc = "";
+        for (int i = 0; i < lista.size(); i++) {
+            cadenaDoc = String.format("%s%s\n", cadenaDoc, lista.get(i));
+        }
+        String cadena = String.format("%s\nLista de Docentes:\n"
+                + "%sPromedio de Sueldos: %.2f\n",
+                super.toString(), cadenaDoc, promedioSueldos);
+        return cadena;
+    }
+
 }
